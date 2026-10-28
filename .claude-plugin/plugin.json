@@ -1,0 +1,9 @@
+{
+  "name": "workplan",
+  "version": "1.0.0",
+  "description": "Standardizes multi-session workplans: create/review/execute/close skills for a phased, git-ignored Markdown planning document, so every workplan is built, tracked and closed the same way regardless of project.",
+  "author": { "name": "zorak1103" },
+  "repository": "https://github.com/zorak1103/workplan",
+  "license": "MIT",
+  "keywords": ["workplan", "planning", "phases", "markdown"]
+}

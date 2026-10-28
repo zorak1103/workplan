@@ -1,0 +1,12 @@
+{
+  "name": "workplan-marketplace",
+  "description": "Marketplace for the workplan plugin: phased, git-ignored workplans for changes that span several Claude Code sessions.",
+  "owner": { "name": "zorak1103" },
+  "plugins": [
+    {
+      "name": "workplan",
+      "source": "./",
+      "description": "Create, review, execute and close phased workplans for multi-session changes."
+    }
+  ]
+}

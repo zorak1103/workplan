@@ -1,0 +1,17 @@
+{
+  "description": "Forces one explicit confirmation before any of this plugin's four skills (create/review/execute/close) starts, in every permission mode including auto -- see scripts/check-skill-entry-confirmation.mjs for the rationale.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/check-skill-entry-confirmation.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

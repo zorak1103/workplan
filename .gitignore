@@ -1,0 +1,19 @@
+# local planning documents of this plugin's own development
+/.workplans/
+
+# tool and editor leftovers
+.sonar/
+.in_use
+*.wrk
+node_modules/
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# tool leftovers of Claude Code plugins used while developing this one
+/.remember/
+/.superpowers/
+
+# working plans and specs of the plugin's own development (not part of the package)
+/docs/superpowers/
