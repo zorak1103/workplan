@@ -84,6 +84,41 @@ automatically adds one line to its instructions, for example: "After an approved
 work that spans several sessions, continue with `/workplan:create --from-design <design
 document>`."
 
+### Example: with `superpowers:brainstorming`
+
+[`superpowers`](https://github.com/obra/superpowers) ships a `brainstorming` skill that fits this
+step well. It interviews you about intent, goals, non-goals and anti-goals, sizes the work, and
+for a project writes a design document to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
+(you can tell it to use another location). Nothing is built until you approve that document.
+The chain then looks like this:
+
+1. Describe your idea to Claude Code and let `brainstorming` run: it asks open questions, plays
+   its understanding back, and sizes the work. If it sizes the work as a project that spans several
+   sessions, it writes the design document and asks for your approval.
+2. Instead of letting `brainstorming` continue with `superpowers:writing-plans` (its default next
+   step), start the workplan from the approved design, for example:
+   `/workplan:create --from-design docs/superpowers/specs/2026-10-28-client-migration-design.md`
+3. `create` maps the design onto the workplan (see the list above), asks only what the design
+   leaves open (typically the session budget and how to cut the phases), and verifies the design's
+   statements about the code. A statement that does not hold becomes a finding.
+4. Continue as usual: optionally `/workplan:review`, then one `/workplan:execute` per session, and
+   `/workplan:close`.
+
+`brainstorming` tells Claude to invoke `writing-plans` and no other skill after approval. Your own
+instructions take precedence over skills, so state the exception once in your `CLAUDE.md`:
+
+```markdown
+After `superpowers:brainstorming` has produced an approved design document for work that spans
+several sessions, continue with `/workplan:create --from-design <design document>` instead of
+`superpowers:writing-plans`. Work that fits one session still goes to `superpowers:writing-plans`
+or is built directly.
+```
+
+Typing the `create` command yourself also avoids the confirmation prompt the plugin's hook shows
+when the model starts a skill on its own. This hand-over has not been run end to end in a live
+session yet; `docu/brainstorming-integration.md` describes the friction points and
+`docu/transfer-checklist.md` has the acceptance run.
+
 ## Critique round (`review`)
 
 Three agents, all pinned to `model: opus`, all read-only:
