@@ -176,6 +176,7 @@ claude
 | 8 | try `set-phase-status.mjs --status Erledigt` | refused, nothing changed |
 | 9 | finish all phases, then `/workplan:close` | harvest questions one at a time, closing sentence appended, delete only after your explicit yes |
 | 10 | run a short `brainstorming` session to an approved design, then `/workplan:create --from-design <design>` | no repeated questions about goals; the design's claims about the code are checked; the preamble names the design; the design file is unchanged |
+| 11 | in an `execute` session for an `Implementation` phase, use `superpowers:writing-plans` for that phase's tasks | the phase stays one session; `execute` still writes status and commit hash back; the superpowers plan does not replace the workplan |
 
 If step 7 shows no prompt, capture a payload as described in
 [docs/troubleshooting.md](docs/troubleshooting.md) and compare it with the hook tests.

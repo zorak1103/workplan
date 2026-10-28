@@ -3,7 +3,8 @@
 This document describes how `superpowers:brainstorming` (read in version 7.0.0) and `workplan`
 fit together. The plugin itself does not depend on `brainstorming`: `create --from-design` takes
 any approved design or spec document. The hand-over described here has not been exercised in a
-live session yet.
+live session yet. How `workplan` differs from the plan-writing skills of `superpowers`
+(`writing-plans` and its executors) is explained in the [README](../README.md).
 
 ## Division of labour
 

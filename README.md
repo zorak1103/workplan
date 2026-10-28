@@ -12,6 +12,34 @@ orders, status sometimes at the top and sometimes at the bottom, phases without 
 to the next session, results that stay in the chat instead of flowing back into the document.
 This plugin makes the format and the flow a convention instead of a verbal agreement.
 
+## How it differs from superpowers
+
+[`superpowers`](https://github.com/obra/superpowers) has a planning component of its own:
+`brainstorming` produces a design, `writing-plans` turns it into an implementation plan, and
+`executing-plans` or `subagent-driven-development` carries the plan out. The two do not compete;
+they plan at different grain and for different lifetimes.
+
+| | `superpowers:writing-plans` | `workplan` |
+|---|---|---|
+| Unit of work | a task with test-first steps: exact files, signatures, test code, commit step | a phase: one whole Claude Code session, described by goal, requires, delivers, files, complexity |
+| Written for | an implementer who has not seen the code and builds it in one run | a fresh session that starts cold, possibly days later |
+| Execution | all tasks in one go without pausing between them, inline or with a subagent per task | exactly one phase per session; `execute` stops and names the next phase |
+| State across sessions | a progress ledger for that run | a status table in the document, written by script after every phase |
+| Review of the plan | the plan is checked by the author; the reviews run on the finished code | `review` critiques the plan before anything is built: fact check, phase cut, devil's advocate |
+| Commits | each task ends with a commit step | the commit cut is a separate, revisable proposal; the planning skills never commit |
+| Where it lives | `docs/superpowers/plans/` | `.workplans/`, git-ignored, closed and deleted when done |
+
+**Rule of thumb.** If the work fits one session, or can run start to finish while you watch,
+use `writing-plans` (or just build it): a phased document is more ceremony than it is worth. If
+the work spans several sessions, touches several modules, or someone should be able to challenge
+the plan before any code is written, use `workplan`.
+
+**They also combine.** `brainstorming` is the natural front end, see "Combining with a design
+step" below. A phase of a workplan is session-sized, so one phase can itself be big enough to
+deserve a fine-grained `writing-plans` task list; the workplan keeps the long-range state, the
+superpowers plan does the minute-by-minute work inside that one session. That nesting has not
+been exercised end to end yet, see `CONTRIBUTING.md` (acceptance run).
+
 ## Installation
 
 ```bash
