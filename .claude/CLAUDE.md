@@ -2,7 +2,7 @@
 
 A Claude Code plugin (skills `create`/`review`/`execute`/`close`, three critic agents, one
 `PreToolUse` hook) that manages phased Markdown workplans under `.workplans/`. Start with
-`README.md`, then `docu/README.md`; `docu/development.md` has the layout, script arguments and
+`README.md`, then `docs/README.md`; `CONTRIBUTING.md` has the layout, script arguments and
 exit codes.
 
 ## Commands
@@ -32,9 +32,9 @@ jq empty .claude-plugin/plugin.json hooks/hooks.json
 - All text (skills, agents, docs, chat output, generated documents) is English.
 - Project-specific rules (test commands, commit format) never go into the skills or templates;
   the plugin is project-neutral.
-- Renaming the plugin touches many places; the list is in `docu/development.md` ("Renaming").
+- Renaming the plugin touches many places; the list is in `CONTRIBUTING.md` ("Renaming the plugin").
 
 ## Docs
 
-Keep `docu/` and `reference/` in step with behaviour changes. When the test count changes,
-`docu/README.md`, `docu/development.md` and `docu/transfer-checklist.md` quote it.
+Keep `docs/` and `reference/` in step with behaviour changes. When the test count changes,
+`docs/README.md` and `CONTRIBUTING.md` quote it.

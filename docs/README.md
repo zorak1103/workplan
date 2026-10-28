@@ -20,16 +20,12 @@ Four skills carry the lifecycle:
 | [installation.md](installation.md) | you want to try or install the plugin, or set up a repository for it |
 | [workflow.md](workflow.md) | you want to know what happens in each session, step by step |
 | [brainstorming-integration.md](brainstorming-integration.md) | you start from an idea and want `brainstorming` and `workplan` to hand over cleanly |
-| [document-format.md](document-format.md) | you write or review a workplan by hand and need the format at a glance |
 | [configuration-and-safety.md](configuration-and-safety.md) | you want to know what the plugin may do on its own, what asks first, and which project rules to add |
-| [migration-from-bars-workplan.md](migration-from-bars-workplan.md) | you have documents or habits from the German predecessor `bars-workplan` |
 | [troubleshooting.md](troubleshooting.md) | a script or skill refuses something and you want to know why |
-| [development.md](development.md) | you change the plugin: layout, scripts, tests, renaming, open items |
-| [decisions.md](decisions.md) | you want to know why it is the way it is, and which calls are still open to change |
-| [transfer-checklist.md](transfer-checklist.md) | you move the package to another machine, finish it and publish it, including the acceptance run in a live session |
 
 The authoritative format rules are in `../reference/document-conventions.md`. The plugin's own
-short README is `../README.md`.
+short README is `../README.md`. If you change the plugin, read [CONTRIBUTING.md](../CONTRIBUTING.md)
+(layout, scripts, tests, renaming, releasing, acceptance run).
 
 ## Five-minute start
 
@@ -47,6 +43,6 @@ short README is `../README.md`.
 
 Everything here is derived from the plugin's skills, scripts and tests. The scripts and the
 validator are covered by the test suite (94 tests at the time of writing). The interaction of the
-skills inside a live Claude Code session, the marketplace installation path and the hand-over
-from `brainstorming` have not been exercised end to end yet. The places where this matters are
-marked "not yet verified" in the individual documents.
+skills inside a live Claude Code session and the hand-over from `brainstorming` are checked by
+hand with the acceptance run in [CONTRIBUTING.md](../CONTRIBUTING.md#acceptance-run), which also lists
+the known limitations.

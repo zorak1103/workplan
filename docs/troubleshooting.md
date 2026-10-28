@@ -10,7 +10,7 @@ means a hard error such as a missing file or an unknown genre.
 |---|---|---|
 | `wrong-extension` | error | the file is not `.md`; rename it |
 | `wrong-directory` | error | the file is not under `.workplans/`; move it |
-| `missing-section` | error | a required `##` section is missing; see the order in [document-format.md](document-format.md) |
+| `missing-section` | error | a required `##` section is missing; see the order in [document-conventions.md](../reference/document-conventions.md) |
 | `section-order` | error | required sections are in the wrong order |
 | `missing-phase-table` | error | no readable pipe table under `## Phase Overview` (a table without outer pipes counts as unreadable) |
 | `empty-phase-table` | error | the table has a header but no phase rows |
@@ -55,13 +55,12 @@ refuses them. To continue such a plan, copy its content into a new `.md` workpla
 | a bug analysis is not offered as a workplan | by design, `workplan-status.mjs` lists only workplans | use `create --from-bug <path>` to turn it into one |
 | `set-phase-status.mjs` rejects `Erledigt` or `Fertig` | the vocabulary is closed and English | use `Open`, `In progress` or `Done` |
 | `close-workplan.mjs` exits with 2 | at least one phase is not `Done` | finish the phases with `execute` first |
-| the validator refuses a document with "Unknown genre" | the title does not start with `# Workplan:` or `# Bug Analysis:`, for example a document from `bars-workplan` | see [migration-from-bars-workplan.md](migration-from-bars-workplan.md) |
+| the validator refuses a document with "Unknown genre" | the title does not start with `# Workplan:` or `# Bug Analysis:` | fix the first line; see the genres in [document-conventions.md](../reference/document-conventions.md) |
 | a status change does not find the row | the table was reformatted (multi-line rows, extra tables) | keep one row per line and one table per section |
 | the skills do not show up | the plugin is not loaded | start with `--plugin-dir`, or check `claude plugin list` |
 | a confirmation appears before a skill starts | the entry hook, because the model chose the skill | expected; type the slash command yourself to skip it |
 | no confirmation appears for a model-chosen skill | the hook was not loaded, or the input schema changed | restart the session; capture a payload with `WORKPLAN_DEBUG_PAYLOAD=1` and compare with `test/check-skill-entry-confirmation.test.mjs` |
 | a change to the hook has no effect | hooks are read at session start | restart the session |
-| both `workplan` and `bars-workplan` offer to handle a request | both are enabled | disable one, see [migration-from-bars-workplan.md](migration-from-bars-workplan.md) |
 | tests fail with an unknown option or glob error | Node older than 21 does not expand the glob | use Node 21 or later, or pass the test files explicitly |
 
 ## Getting a payload for the hook

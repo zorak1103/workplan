@@ -10,12 +10,11 @@ const SKIP_DIRS = new Set(['.git', '.remember', 'node_modules']);
 const SKIP_PREFIXES = ['docs/superpowers'];
 const CHECKED_EXTENSIONS = new Set(['.md', '.mjs', '.json']);
 
-// Everything under test/ names `.adoc` on purpose (negative tests); the two docs below mention
-// the old format deliberately.
+// Everything under test/ names `.adoc` on purpose (negative tests); the doc below mentions
+// the old format deliberately (old workplans are no longer read).
 const ALLOWLIST = [
   'test/',
-  'docu/troubleshooting.md',
-  'docu/migration-from-bars-workplan.md',
+  'docs/troubleshooting.md',
 ];
 
 const LEFTOVER_PATTERNS = [

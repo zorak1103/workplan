@@ -19,7 +19,7 @@ This plugin makes the format and the flow a convention instead of a verbal agree
 ```
 
 To try it for one session without installing: `claude --plugin-dir <path-to-this-repository>`.
-All options are in `docu/installation.md`; the full documentation starts at `docu/README.md`.
+All options are in `docs/installation.md`; the full documentation starts at `docs/README.md`.
 
 ## Skills
 
@@ -32,7 +32,7 @@ All options are in `docu/installation.md`; the full documentation starts at `doc
 
 All four skills are model-invocable — the model can start them itself when a request matches a
 description, just like via `/workplan:<name>`. When the model chooses a skill itself, the start
-goes through the plugin's own `PreToolUse` hook gate (see `## Hooks`) and requires one explicit
+goes through the plugin's own `PreToolUse` hook gate (see "Permissions and hooks") and requires one explicit
 confirmation, in every permission mode including auto. The explicit slash command does not reach
 this gate (verified: it does not trigger a `Skill` tool call) — there the intent is already given
 by the deliberate input. A side effect of model invocability: all four descriptions are
@@ -116,8 +116,8 @@ or is built directly.
 
 Typing the `create` command yourself also avoids the confirmation prompt the plugin's hook shows
 when the model starts a skill on its own. This hand-over has not been run end to end in a live
-session yet; `docu/brainstorming-integration.md` describes the friction points and
-`docu/transfer-checklist.md` has the acceptance run.
+session yet; `docs/brainstorming-integration.md` describes the friction points and
+`CONTRIBUTING.md` has the acceptance run.
 
 ## Critique round (`review`)
 
@@ -132,40 +132,18 @@ Three agents, all pinned to `model: opus`, all read-only:
 Nothing from the critique round lands in the document automatically — adoptions go through
 `/workplan:execute --amend`.
 
-## Permissions
+## Permissions and hooks
 
-`allowed-tools` in the `SKILL.md` files is a **turn-scoped grant**, not a session unlock and
-**not a restriction** — every tool remains callable in principle, the list only determines what
-is pre-approved for this skill turn without a prompt; everything else goes through the project's
-normal permission flow (`.claude/settings.local.json`). That `create` and `review` list no
-general `Bash`/`Edit` is therefore not a technical barrier against implementing during planning —
-it is a rule these skills follow according to their own instructions ("plans, never implements"),
-not one the frontmatter enforces. `execute` is the only skill that pre-approves unrestricted
-`Bash`, because an implementation phase needs the target project's build/test/commit tooling,
-which this plugin cannot predict.
+`allowed-tools` in the `SKILL.md` files pre-approves tools for a skill's turn; it is not a
+restriction. "Plans, never implements" in `create` and `review` is a rule in the skill text, not
+something the frontmatter enforces. `execute` is the only skill with unrestricted `Bash`, because
+an implementation phase needs the target project's own tooling.
 
-## Hooks
-
-A `PreToolUse` hook (`hooks/hooks.json`, matcher `Skill`, script
-`scripts/check-skill-entry-confirmation.mjs`) forces a harness-side confirmation before the model
-itself starts one of the four skills — in every permission mode including auto (unlike
-`Edit`/`Write`, a `Skill` call has no default prompt of its own that "ask only in auto mode"
-could rely on). The explicit `/workplan:<name>` slash command demonstrably does not reach this
-hook — it does not trigger a `Skill` tool call but another, internal mechanism; an additional
-prompt would only be friction there anyway, since the intent is already given by the explicit
-input. The hook only ever escalates to `ask`, never to `deny`/`allow` — in the worst case a false
-detection costs a superfluous prompt, never a blocked call.
-
-Detection runs in two tiers: first the serialized `tool_input` is searched for the plugin name
-(the documented schema of the `Skill` tool is not officially fixed, a scan is more robust than
-guessing a field name); only if that finds nothing, a fallback on one of the four bare skill
-names applies, which backs off immediately as soon as a *foreign* plugin name qualifies the same
-name (prevents confusion with e.g. `other-plugin:review`). Fail-open on every parse error — a
-hook that can crash the tool-call pipeline is worse than one that occasionally misses its gate.
-
-> [!NOTE]
-> Hooks are loaded at session start — a change to `hooks/hooks.json` or the script only
-> takes effect after a session restart; a plain `/reload-plugins` is not enough.
+A `PreToolUse` hook (`hooks/hooks.json`) forces one confirmation before the model itself starts
+one of the four skills, in every permission mode including auto. The explicit
+`/workplan:<name>` slash command does not reach the hook. The hook only ever escalates to `ask`
+and fails open. Hooks are loaded at session start, so a change needs a session restart.
+Details: [docs/configuration-and-safety.md](docs/configuration-and-safety.md).
 
 ## What the plugin does not do
 
@@ -178,7 +156,7 @@ hook that can crash the tool-call pipeline is worse than one that occasionally m
 - Never creates a `.workplans/` directory or a git-ignore entry without confirmation.
 - Never pushes to or comments on a merge request without an explicit request.
 - Never starts one of the four skills without prior, explicit confirmation — not even in auto
-  mode (see `## Hooks`).
+  mode (see "Permissions and hooks").
 
 ## Development
 

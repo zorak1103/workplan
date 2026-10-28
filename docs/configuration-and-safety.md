@@ -81,4 +81,4 @@ For the hand-over from brainstorming see [brainstorming-integration.md](brainsto
 All skill text, agent text, reference files, chat output of the skills and the content of
 generated documents are English. The plugin has no setting for another language. A different
 language means changing the vocabulary in `scripts/lib/workplan.mjs` and the validator and
-rewriting the text files; see [development.md](development.md).
+rewriting the text files; see [CONTRIBUTING.md](../CONTRIBUTING.md).

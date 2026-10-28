@@ -154,7 +154,7 @@ skill's own check.
 ## What the scripts do for the skills
 
 The skills never edit tables by hand. They call the scripts in `scripts/`; see
-[development.md](development.md) for arguments and exit codes.
+[CONTRIBUTING.md](../CONTRIBUTING.md) for arguments and exit codes.
 
 | Script | Used by | Purpose |
 |---|---|---|
